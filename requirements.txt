@@ -3,3 +3,7 @@ uvicorn
 jinja2
 sqlalchemy
 passlib[bcrypt]
+
+fpdf2
+pymysql
+

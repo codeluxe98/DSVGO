@@ -2,16 +2,40 @@
 <html>
   <body>
     <h1>Admin Panel</h1>
+
+    <p>{{users|length}} users registered</p>
+    <h2>Users</h2>
+    <ul>
+    {% for u in users %}
+      <li>
+        {{u.email}} - admin: {{u.is_admin}}
+        {% if not u.is_admin %}
+        <form action="/admin/user/{{u.id}}/make_admin" method="post" style="display:inline;">
+          <input name="email" placeholder="admin email" />
+          <input name="password" placeholder="password" type="password" />
+          <button>Make admin</button>
+        </form>
+        {% endif %}
+      </li>
+
     <h2>Users</h2>
     <ul>
     {% for u in users %}
       <li>{{u.email}} - admin: {{u.is_admin}}</li>
+
     {% endfor %}
     </ul>
     <h2>Requests</h2>
     <ul>
     {% for r in requests %}
+
+      <li>
+        {{r.contact}} - status: {{r.status}}
+        {% if r.pdf_path %}<a href="/request/{{r.id}}/pdf">PDF</a>{% endif %}
+      </li>
+
       <li>{{r.contact}} - status: {{r.status}}</li>
+
     {% endfor %}
     </ul>
   </body>
