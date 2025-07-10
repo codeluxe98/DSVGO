@@ -1,15 +1,16 @@
 # DSGVO-Datenlöschtool
 
-Dieses Projekt enthält ein kleines Beispiel einer FastAPI-Anwendung, mit der sich Nutzende registrieren, anmelden und eine DSGVO-Datenlöschanfrage stellen können. Die Daten werden in einer SQLite-Datenbank gespeichert. Ein einfacher Admin-Bereich zeigt alle angelegten Nutzenden und Anfragen an.
+Dieses Projekt enthält ein erweitertes Beispiel einer FastAPI-Anwendung. Nutzende können sich registrieren, anmelden und eine DSGVO-Datenlöschanfrage stellen. Alle Broker aus der Datenbank werden benachrichtigt und es wird ein PDF erzeugt, das heruntergeladen werden kann. Aktionen werden protokolliert und ein Admin-Bereich ermöglicht die Verwaltung der Nutzenden.
 
 ## ✅ Funktionen
 - Registrierung und Login
 - Formular für Datenlöschanfragen
-- Beispielhändler in `data_brokers.json`
-- Einfaches Admin-Panel
+- Händler werden aus einer Datenbank geladen
+- PDF mit benachrichtigten Händlern
+- Admin-Panel zur Benutzerverwaltung
 
 ## 🚀 Schnellstart
 ```bash
 docker compose up --build
 ```
-Die Anwendung ist danach unter [http://localhost:8000](http://localhost:8000) erreichbar.
+Die Anwendung ist danach unter [http://localhost:8000](http://localhost:8000) erreichbar. Mit `DATABASE_URL` kann auch eine MySQL-Datenbank genutzt werden (siehe `docker-compose.yml`).
