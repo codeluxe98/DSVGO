@@ -1,1 +1,8 @@
-# Inhalt von .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+pdfs/
+backups/
+

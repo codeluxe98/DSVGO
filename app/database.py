@@ -18,7 +18,7 @@ engine = create_engine(
     DATABASE_URL,
     connect_args={"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {},
 )
-=======
+
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
@@ -63,6 +63,7 @@ class Log(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     user = relationship("User")
     request = relationship("Request")
+
 
     user = relationship("User")
 

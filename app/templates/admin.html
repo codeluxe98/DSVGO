@@ -18,6 +18,7 @@
         {% endif %}
       </li>
 
+
     <h2>Users</h2>
     <ul>
     {% for u in users %}
@@ -33,6 +34,7 @@
         {{r.contact}} - status: {{r.status}}
         {% if r.pdf_path %}<a href="/request/{{r.id}}/pdf">PDF</a>{% endif %}
       </li>
+
 
       <li>{{r.contact}} - status: {{r.status}}</li>
 

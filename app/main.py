@@ -2,7 +2,11 @@ from fastapi import FastAPI, Depends, Form, HTTPException
 
 from fastapi.responses import HTMLResponse, FileResponse
 
+
+from fastapi.responses import HTMLResponse, FileResponse
+
 from fastapi.responses import HTMLResponse
+
 
 from passlib.hash import bcrypt
 from sqlalchemy.orm import Session
@@ -21,12 +25,14 @@ from .database import (
 import json
 import os
 from fpdf import FPDF
+
 from .database import Base, engine, SessionLocal, User, Request as DelRequest
 import json
 
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
+
 
 @app.on_event("startup")
 def load_brokers():
@@ -90,6 +96,11 @@ def register(email: str = Form(...), password: str = Form(...), db: Session = De
     db.commit()
     send_email(user.email, "Registration", "Welcome to the DSGVO tool")
 
+
+    db.add(Log(user_id=user.id, action="register"))
+    db.commit()
+    send_email(user.email, "Registration", "Welcome to the DSGVO tool")
+
     return {"message": "registered"}
 
 @app.post("/login")
@@ -97,6 +108,10 @@ def login(email: str = Form(...), password: str = Form(...), db: Session = Depen
     user = authenticate(db, email, password)
     if not user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
+
+    db.add(Log(user_id=user.id, action="login"))
+    db.commit()
+
 
     db.add(Log(user_id=user.id, action="login"))
     db.commit()
@@ -131,14 +146,13 @@ def request_pdf(req_id: int, db: Session = Depends(get_db)):
     if not req or not req.pdf_path:
         raise HTTPException(status_code=404, detail="Request not found")
     return FileResponse(req.pdf_path, media_type="application/pdf")
-=======
+
     brokers = json.load(open("data_brokers.json"))
     req = DelRequest(user_id=user.id, contact=contact, status="sent")
     db.add(req)
     db.commit()
     # Placeholder for sending emails
     return {"brokers_notified": [b["name"] for b in brokers]}
-
 
 @app.get("/admin", response_class=HTMLResponse)
 def admin_panel(request: Request, email: str, password: str, db: Session = Depends(get_db)):
@@ -165,5 +179,4 @@ def make_admin(user_id: int, email: str = Form(...), password: str = Form(...), 
     db.add(Log(user_id=admin.id, action=f"made {user.email} admin"))
     db.commit()
     return {"status": "ok"}
-
 
