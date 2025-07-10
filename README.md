@@ -13,3 +13,8 @@ Dieses Projekt enthält ein kleines Beispiel einer FastAPI-Anwendung, mit der si
 docker compose up --build
 ```
 Die Anwendung ist danach unter [http://localhost:8000](http://localhost:8000) erreichbar.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
