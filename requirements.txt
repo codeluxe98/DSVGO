@@ -1,1 +1,5 @@
-# Inhalt von requirements.txt
+fastapi
+uvicorn
+jinja2
+sqlalchemy
+passlib[bcrypt]

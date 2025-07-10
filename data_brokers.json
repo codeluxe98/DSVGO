@@ -1,1 +1,4 @@
-# Inhalt von data_brokers.json
+[
+  {"name": "Acme Brokers", "email": "privacy@acme.test"},
+  {"name": "DataHouse", "email": "gdpr@datahouse.test"}
+]
